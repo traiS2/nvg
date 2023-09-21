@@ -51,7 +51,6 @@ public class RegisterByUsernameImpl implements RegisterBehavior<Account> {
         userRepository.save(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
-        //hihi
     }
 
     private boolean existsUsername(String username) {

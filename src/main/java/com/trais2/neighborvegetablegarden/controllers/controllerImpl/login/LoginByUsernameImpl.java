@@ -5,6 +5,7 @@ import com.trais2.neighborvegetablegarden.models.entity.User;
 import com.trais2.neighborvegetablegarden.security.jwt.JwtUtils;
 import com.trais2.neighborvegetablegarden.security.services.UserDetailsImplement;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -18,15 +19,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class LoginByUsernameImpl implements LoginBehavior<LoginByUsernameResponse, LoginByUsernameRequest> {
+public class LoginByUsernameImpl implements LoginBehavior<LoginByUsernameRequest> {
     @Autowired
-    AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager;
 
     @Autowired
-    JwtUtils jwtUtils;
+    private JwtUtils jwtUtils;
 
     @Override
-    public LoginByUsernameResponse login(LoginByUsernameRequest loginRequest) {
+    public ResponseEntity<?> login(LoginByUsernameRequest loginRequest) {
         LoginByUsernameResponse response = null;
 
         Authentication authentication = authenticationManager.authenticate(
@@ -36,12 +37,12 @@ public class LoginByUsernameImpl implements LoginBehavior<LoginByUsernameRespons
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
 
-        UserDetailsImplement personDetails = (UserDetailsImplement) authentication.getPrincipal();
-        List<String> roles = personDetails.getAuthorities().stream()
+        UserDetailsImplement userDetailsImplement = (UserDetailsImplement) authentication.getPrincipal();
+        List<String> roles = userDetailsImplement.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
 
-        response = new LoginByUsernameResponse(jwt, personDetails.getId(), personDetails.getUsername(), roles);
-        return  response;
+        response = new LoginByUsernameResponse(jwt, userDetailsImplement.getId(), userDetailsImplement.getUsername(), roles);
+        return ResponseEntity.ok(response);
     }
 }

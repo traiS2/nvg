@@ -1,11 +1,12 @@
 package com.trais2.neighborvegetablegarden.controllers;
 
+import com.trais2.neighborvegetablegarden.controllers.controllerImpl.login.LoginByPhoneNumber;
 import com.trais2.neighborvegetablegarden.controllers.controllerImpl.login.LoginByUsernameImpl;
+import com.trais2.neighborvegetablegarden.utils.validate.AccountValidate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import payload.request.login.LoginByUsernameRequest;
-import payload.response.login.LoginByUsernameResponse;
 
 import javax.validation.Valid;
 
@@ -16,13 +17,26 @@ public class LoginController {
     @Autowired
     private LoginByUsernameImpl loginByUsernameImpl;
 
+    @Autowired
+    private LoginByPhoneNumber loginByPhoneNumber;
+
+    @Autowired
+    private AccountValidate accountValidate;
+
     @PostMapping("/login-by-username")
     public ResponseEntity<?> loginByUsername(@Valid @RequestBody LoginByUsernameRequest request) {
+        String message = accountValidate.checkUsernameExists(request.getUsername());
 
-        LoginByUsernameResponse response = (LoginByUsernameResponse) loginByUsernameImpl.login(new LoginByUsernameRequest(request.getUsername(), request.getPassword()));
-        if(response != null) {
-            return ResponseEntity.ok(response);
+        if(message != null) {
+            return ResponseEntity.badRequest().body(message);
         }
-        return ResponseEntity.badRequest().body("User isn't exist");
+
+        return loginByUsername(new LoginByUsernameRequest(request.getUsername(), request.getPassword()));
+    }
+
+    @PostMapping("/login-by-phone-number")
+    public ResponseEntity<?> loginByPhoneNumber() {
+//        loginByPhoneNumber.login()
+        return null;
     }
 }
