@@ -2,8 +2,7 @@ package com.trais2.neighborvegetablegarden.models.entity;
 
 import com.trais2.neighborvegetablegarden.models.enums.ERole;
 import jakarta.persistence.*;
-
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "role")

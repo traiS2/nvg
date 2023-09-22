@@ -3,12 +3,12 @@ package com.trais2.neighborvegetablegarden.controllers;
 import com.trais2.neighborvegetablegarden.controllers.controllerImpl.login.LoginByPhoneNumber;
 import com.trais2.neighborvegetablegarden.controllers.controllerImpl.login.LoginByUsernameImpl;
 import com.trais2.neighborvegetablegarden.utils.validate.AccountValidate;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import payload.request.login.LoginByUsernameRequest;
 
-import javax.validation.Valid;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -31,7 +31,7 @@ public class LoginController {
             return ResponseEntity.badRequest().body(message);
         }
 
-        return loginByUsername(new LoginByUsernameRequest(request.getUsername(), request.getPassword()));
+        return loginByUsernameImpl.login(new LoginByUsernameRequest(request.getUsername(), request.getPassword()));
     }
 
     @PostMapping("/login-by-phone-number")
