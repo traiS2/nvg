@@ -1,4 +1,4 @@
-package com.trais2.neighborvegetablegarden.models.entity;
+package com.trais2.neighborvegetablegarden.models.entity.user;
 
 import com.trais2.neighborvegetablegarden.models.enums.ERole;
 import jakarta.persistence.*;

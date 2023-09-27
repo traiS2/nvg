@@ -1,4 +1,4 @@
-package com.trais2.neighborvegetablegarden.models.entity;
+package com.trais2.neighborvegetablegarden.models.entity.user;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -25,6 +25,6 @@ public class Email {
     private String access_token;
 
     @OneToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
 }

@@ -1,4 +1,4 @@
-package com.trais2.neighborvegetablegarden.models.entity;
+package com.trais2.neighborvegetablegarden.models.entity.user;
 
 
 import jakarta.persistence.*;
@@ -23,6 +23,6 @@ public class Phone {
     private String phone_number;
 
     @OneToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
 }

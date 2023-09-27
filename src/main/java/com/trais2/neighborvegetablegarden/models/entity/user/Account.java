@@ -1,4 +1,4 @@
-package com.trais2.neighborvegetablegarden.models.entity;
+package com.trais2.neighborvegetablegarden.models.entity.user;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
