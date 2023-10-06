@@ -1,7 +1,7 @@
 package com.trais2.neighborvegetablegarden.controllers;
 
 import com.trais2.neighborvegetablegarden.config.GlobalExceptionHandler;
-import com.trais2.neighborvegetablegarden.controllers.controllerImpl.register.RegisterByUsernameImpl;
+import com.trais2.neighborvegetablegarden.services.register.RegisterByUsernameImpl;
 import com.trais2.neighborvegetablegarden.models.entity.user.Account;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

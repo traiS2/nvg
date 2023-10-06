@@ -20,8 +20,10 @@ public class Store {
     @Id
     private int store_id;
 
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "image")
     private String image;
 
     @OneToOne
@@ -41,4 +43,8 @@ public class Store {
             joinColumns = @JoinColumn(name = "store_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories;
+
+    @OneToMany(mappedBy = "store")
+    private Set<StoreProduct> stores_products;
+
 }

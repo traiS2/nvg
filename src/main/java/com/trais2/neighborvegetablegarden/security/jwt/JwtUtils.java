@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.WebUtils;
@@ -34,27 +35,24 @@ public class JwtUtils {
         return cookie != null ? cookie.getValue() : null;
     }
 
-//    public ResponseCookie generateJwtCookie(PersonDetailsImplement personDetailsImplement) {
-//        String jwt = generateTokenFromUsername(personDetailsImplement.getUsername());
-//        return ResponseCookie.from(jwtCookie, jwt).path("/api").maxAge(24 * 60 * 60).httpOnly(true).build();
-//
-//    }
-//
-//    public ResponseCookie getCleanJwtCookie() {
-//        return ResponseCookie.from(jwtCookie, null).path("/api").build();
-//    }
-//
-//    public String getUserNameFromJwtToken(String token) {
-//       return Jwts.parserBuilder().setSigningKey(key()).build()
-//                .parseClaimsJws(token).getBody().getSubject();
-//    }
+    public ResponseCookie generateJwtCookie(UserDetailsImplement userDetailsImplement) {
+        String jwt = generateTokenFromUsername(userDetailsImplement.getUsername());
+        return ResponseCookie.from(jwtCookie, jwt).path("/api").maxAge(24 * 60 * 60).httpOnly(true).build();
 
-    public String generateJwtToken(Authentication authentication) {
+    }
 
-        UserDetailsImplement personPrincipal = (UserDetailsImplement) authentication.getPrincipal();
+    public ResponseCookie getCleanJwtCookie() {
+        return ResponseCookie.from(jwtCookie, null).path("/api").build();
+    }
 
+    public String getUserNameFromJwtToken(String token) {
+       return Jwts.parserBuilder().setSigningKey(key()).build()
+                .parseClaimsJws(token).getBody().getSubject();
+    }
+
+    public String generateTokenFromUsername(String username) {
         return Jwts.builder()
-                .setSubject((personPrincipal.getUsername()))
+                .setSubject(username)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
                 .signWith(key(), SignatureAlgorithm.HS256)
@@ -81,11 +79,4 @@ public class JwtUtils {
         }
         return false;
     }
-
-    public String getUserNameFromJwtToken(String token) {
-        return Jwts.parserBuilder().setSigningKey(key()).build()
-                .parseClaimsJws(token).getBody().getSubject();
-    }
-
-
 }

@@ -1,4 +1,4 @@
-package com.trais2.neighborvegetablegarden.controllers.controllerImpl.login;
+package com.trais2.neighborvegetablegarden.services.login;
 
 import com.trais2.neighborvegetablegarden.models.behavior.LoginBehavior;
 import org.springframework.http.ResponseEntity;

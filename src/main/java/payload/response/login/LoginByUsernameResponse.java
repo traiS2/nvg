@@ -22,4 +22,11 @@ public class LoginByUsernameResponse {
         this.username = username;
         this.roles = roles;
     }
+    public LoginByUsernameResponse(Long id, String username, List<String> roles) {
+        this.token = token;
+        this.id = id;
+        this.username = username;
+        this.roles = roles;
+    }
+
 }

@@ -1,6 +1,8 @@
 package com.trais2.neighborvegetablegarden.models.entity;
 
+import com.trais2.neighborvegetablegarden.models.entity.store.Category;
 import com.trais2.neighborvegetablegarden.models.entity.store.Store;
+import com.trais2.neighborvegetablegarden.models.entity.store.StoreProduct;
 import com.trais2.neighborvegetablegarden.models.entity.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -24,9 +26,16 @@ public class Status implements Serializable {
 
     private String name;
 
-    @OneToMany(mappedBy = "status")
+    @OneToMany(mappedBy = "status", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<User> users;
 
-    @OneToMany(mappedBy = "status")
+    @OneToMany(mappedBy = "status", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Store> stores;
+
+    @OneToMany(mappedBy = "status", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<StoreProduct> stores_products;
+
+    @OneToMany(mappedBy = "status", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Category> categories;
+
 }

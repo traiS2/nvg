@@ -1,4 +1,4 @@
-package com.trais2.neighborvegetablegarden.controllers.controllerImpl.register;
+package com.trais2.neighborvegetablegarden.services.register;
 
 import com.trais2.neighborvegetablegarden.models.behavior.RegisterBehavior;
 import com.trais2.neighborvegetablegarden.models.entity.user.Account;
