@@ -1,6 +1,6 @@
 package com.trais2.neighborvegetablegarden.security.services;
 
-import com.trais2.neighborvegetablegarden.models.entity.user.User;
+import com.trais2.neighborvegetablegarden.model.entity.user.User;
 import com.trais2.neighborvegetablegarden.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;

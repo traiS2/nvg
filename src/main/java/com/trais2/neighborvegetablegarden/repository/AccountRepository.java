@@ -1,6 +1,6 @@
 package com.trais2.neighborvegetablegarden.repository;
 
-import com.trais2.neighborvegetablegarden.models.entity.user.Account;
+import com.trais2.neighborvegetablegarden.model.entity.user.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

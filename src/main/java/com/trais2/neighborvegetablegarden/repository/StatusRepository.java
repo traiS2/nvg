@@ -1,6 +1,6 @@
 package com.trais2.neighborvegetablegarden.repository;
 
-import com.trais2.neighborvegetablegarden.models.entity.Status;
+import com.trais2.neighborvegetablegarden.model.entity.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

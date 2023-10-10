@@ -5,11 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
 @Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class StatusDTO {
-    private Integer status_id;
+public class ProductDTO {
+    private int product_id;
     private String name;
+    private String image;
+    private CategoryDTO category;
+    private StatusDTO status;
 }
