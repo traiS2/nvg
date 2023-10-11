@@ -8,4 +8,8 @@ import java.util.List;
 @AllArgsConstructor
 public class GetAllCategoryResponse {
     private List<CategoryDTO> categories;
+
+    public List<CategoryDTO> getCategories() {
+        return categories;
+    }
 }

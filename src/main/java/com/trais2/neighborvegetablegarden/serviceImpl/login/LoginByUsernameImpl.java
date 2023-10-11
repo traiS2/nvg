@@ -1,6 +1,5 @@
 package com.trais2.neighborvegetablegarden.serviceImpl.login;
 
-import com.trais2.neighborvegetablegarden.model.behavior.LoginBehavior;
 import com.trais2.neighborvegetablegarden.security.jwt.JwtUtils;
 import com.trais2.neighborvegetablegarden.security.services.UserDetailsImplement;
 import com.trais2.neighborvegetablegarden.service.LoginService;

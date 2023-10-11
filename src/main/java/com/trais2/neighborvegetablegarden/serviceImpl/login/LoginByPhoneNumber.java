@@ -1,6 +1,5 @@
 package com.trais2.neighborvegetablegarden.serviceImpl.login;
 
-import com.trais2.neighborvegetablegarden.model.behavior.LoginBehavior;
 import com.trais2.neighborvegetablegarden.service.LoginService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;

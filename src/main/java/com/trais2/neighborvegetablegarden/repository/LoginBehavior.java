@@ -1,4 +1,4 @@
-package com.trais2.neighborvegetablegarden.model.behavior;
+package com.trais2.neighborvegetablegarden.repository;
 
 import org.springframework.http.ResponseEntity;
 

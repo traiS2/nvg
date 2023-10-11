@@ -1,6 +1,6 @@
 package com.trais2.neighborvegetablegarden.serviceImpl.register;
 
-import com.trais2.neighborvegetablegarden.model.behavior.RegisterBehavior;
+import com.trais2.neighborvegetablegarden.repository.RegisterBehavior;
 import com.trais2.neighborvegetablegarden.model.entity.user.Account;
 import com.trais2.neighborvegetablegarden.model.enums.ERole;
 import com.trais2.neighborvegetablegarden.model.entity.user.Role;

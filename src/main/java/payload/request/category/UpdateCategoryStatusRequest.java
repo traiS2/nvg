@@ -1,12 +1,11 @@
 package payload.request.category;
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 
 @Getter
 public class UpdateCategoryStatusRequest {
-    @NotEmpty(message = "Category id is required")
-    private Integer category_id;
-    @NotEmpty(message = "Status id is required")
-    private Integer status_id;
+    private int category_id;
+    private int status_id;
 }

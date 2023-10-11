@@ -50,6 +50,7 @@ public class CategoryServiceImpl implements CategoryService {
         Optional<Category> categoryOptional = categoryRepository.findById(categoryRequest.getCategory_id());
         if (categoryOptional.isPresent()) {
             categoryOptional.get().setName(categoryRequest.getName());
+            categoryRepository.save(categoryOptional.get());
         } else {
             return "Category not found";
         }
