@@ -16,15 +16,16 @@ import lombok.NoArgsConstructor;
 public class Email {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long email_id;
+    private Long id;
 
     @NotBlank
     private String email;
 
     @NotBlank
-    private String access_token;
+    @Column(name = "email_token")
+    private String accessToken;
 
     @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 }

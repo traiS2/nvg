@@ -18,7 +18,7 @@ import java.util.Set;
 @Data
 public class Store {
     @Id
-    private int store_id;
+    private int id;
 
     @Column(columnDefinition = "nvarchar(255)")
     private String name;
@@ -26,21 +26,21 @@ public class Store {
     private String image;
 
     @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
     @OneToOne
-    @JoinColumn(name = "address_id", referencedColumnName = "address_id")
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
 
     @ManyToOne
-    @JoinColumn(name = "status_id", referencedColumnName = "status_id")
+    @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "store_category",
-            joinColumns = @JoinColumn(name = "store_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id"))
+            joinColumns = @JoinColumn(name = "store_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"))
     private Set<Category> categories;
 
     @OneToMany(mappedBy = "store")

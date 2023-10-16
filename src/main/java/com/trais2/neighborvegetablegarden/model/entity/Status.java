@@ -6,11 +6,10 @@ import com.trais2.neighborvegetablegarden.model.entity.store.Store;
 import com.trais2.neighborvegetablegarden.model.entity.store.StoreProduct;
 import com.trais2.neighborvegetablegarden.model.entity.user.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -19,27 +18,29 @@ import java.util.Set;
 })
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class Status implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int status_id;
+    private int id;
 
     private String name;
 
     @OneToMany(mappedBy = "status", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<User> users;
+    private List<User> users;
 
     @OneToMany(mappedBy = "status", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Store> stores;
+    private List<Store> stores;
 
     @OneToMany(mappedBy = "status", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<StoreProduct> stores_products;
+    @Column(name = "stores_products")
+    private List<StoreProduct> storesProducts;
 
     @OneToMany(mappedBy = "status", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Category> categories;
+    private List<Category> categories;
 
     @OneToMany(mappedBy = "status", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Product> products;
+    private List<Product> products;
 
 }

@@ -14,7 +14,7 @@ import java.util.Set;
 @Data
 public class Commune {
     @Id
-    private int commune_id;
+    private int id;
 
     @Column(columnDefinition = "nvarchar(255)")
     private String name;
@@ -23,6 +23,6 @@ public class Commune {
     private Set<Address> addresses;
 
     @ManyToOne
-    @JoinColumn(name = "district_id", referencedColumnName = "district_id")
+    @JoinColumn(name = "district_id", referencedColumnName = "id")
     private District district;
 }

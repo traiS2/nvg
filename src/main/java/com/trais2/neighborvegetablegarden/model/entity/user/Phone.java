@@ -17,12 +17,13 @@ import lombok.NoArgsConstructor;
 public class Phone {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long phone_id;
+    private Long id;
 
     @NotBlank
-    private String phone_number;
+    @Column(name = "phone_number")
+    private String phoneNumber;
 
     @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 }

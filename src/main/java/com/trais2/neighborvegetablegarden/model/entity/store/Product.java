@@ -1,11 +1,10 @@
 package com.trais2.neighborvegetablegarden.model.entity.store;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.trais2.neighborvegetablegarden.model.entity.Status;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Set;
 
@@ -13,11 +12,12 @@ import java.util.Set;
 @Table(name = "product")
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int product_id;
+    private int id;
 
     @NotEmpty(message = "Product name is required")
     @Column(unique = true, name = "name", columnDefinition = "nvarchar(255)")
@@ -26,15 +26,16 @@ public class Product {
     @NotEmpty(message = "Product description is required")
     private String image;
 
-    @OneToMany(mappedBy = "product")
-    private Set<StoreProduct> stores_products;
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    @Column(name = "stores_products")
+    private Set<StoreProduct> storesProducts;
 
-    @ManyToOne
-    @JoinColumn(name = "status_id", referencedColumnName = "status_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
 
     public Product(String name, String image, Status status, Category category) {

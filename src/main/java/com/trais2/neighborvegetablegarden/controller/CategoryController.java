@@ -18,6 +18,7 @@ import payload.response.MessageResponse;
 import payload.response.category.GetAllCategoryResponse;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RestController
@@ -32,7 +33,7 @@ public class CategoryController {
         this.validationExceptionHandler = validationExceptionHandler;
     }
 
-    @PostMapping("/create")
+    @PostMapping("/create-category")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<MessageResponse> createCategory(@Valid @RequestBody CreateCategoryRequest category, BindingResult bindingResult) {
         String errorMessage = validationExceptionHandler.getFirstErrorMessage(bindingResult);
@@ -46,11 +47,22 @@ public class CategoryController {
         }
     }
 
-    @GetMapping("/get-all")
+    @GetMapping("/get-all-categories")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<GetAllCategoryResponse> getAllCategories() {
+    public ResponseEntity<?> getAllCategories() {
         List<CategoryDTO> categories = categoryService.getAllCategories();
-        return ResponseEntity.ok().body(new GetAllCategoryResponse(categories));
+        return categories != null ?
+                ResponseEntity.ok().body(new GetAllCategoryResponse(categories)) :
+                ResponseEntity.badRequest().body(new MessageResponse("Error when get all categories"));
+    }
+
+    @GetMapping("/get-all-categories-with-products")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> getAllCategoriesWithProducts() {
+        List<?> categoriesWithProducts = categoryService.getAllCategoriesWithProducts();
+        return categoriesWithProducts != null ?
+                ResponseEntity.ok().body(categoriesWithProducts) :
+                ResponseEntity.badRequest().body(new MessageResponse("Error when get all categories"));
     }
 
     @PutMapping("/update-category-name")
@@ -67,17 +79,4 @@ public class CategoryController {
         }
     }
 
-    @PutMapping("/update-category-status")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<MessageResponse> updateCategoryStatus(@Valid @RequestBody UpdateCategoryStatusRequest categoryRequest, BindingResult bindingResult) {
-        String errorMessage = validationExceptionHandler.getFirstErrorMessage(bindingResult);
-        if (errorMessage != null) {
-            return ResponseEntity.badRequest().body(new MessageResponse(errorMessage));
-        } else {
-            String updateCategoryStatusMessage = categoryService.updateCategoryStatus(categoryRequest);
-            return updateCategoryStatusMessage == null
-                    ? ResponseEntity.ok().body(new MessageResponse("Category status updated successfully"))
-                    : ResponseEntity.badRequest().body(new MessageResponse(updateCategoryStatusMessage));
-        }
-    }
 }

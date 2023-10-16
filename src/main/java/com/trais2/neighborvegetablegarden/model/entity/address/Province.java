@@ -14,7 +14,7 @@ import java.util.Set;
 @Data
 public class Province {
     @Id
-    private int province_id;
+    private int id;
 
     @Column(columnDefinition = "nvarchar(255)")
     private String name;

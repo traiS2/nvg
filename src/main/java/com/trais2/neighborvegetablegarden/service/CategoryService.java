@@ -11,8 +11,8 @@ import java.util.List;
 
 @Service
 public interface CategoryService {
+    public List<?> getAllCategoriesWithProducts();
     public String addCategory(CreateCategoryRequest category);
     public String updateCategory(UpdateCategoryRequest category);
-    public String updateCategoryStatus(UpdateCategoryStatusRequest category);
     public List<CategoryDTO> getAllCategories();
 }

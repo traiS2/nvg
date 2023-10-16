@@ -14,13 +14,13 @@ import java.util.Set;
 @Data
 public class District {
     @Id
-    private int district_id;
+    private int id;
 
     @Column(columnDefinition = "nvarchar(255)")
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "province_id", referencedColumnName = "province_id")
+    @JoinColumn(name = "province_id", referencedColumnName = "id")
     private Province province;
 
     @OneToMany(mappedBy = "district")

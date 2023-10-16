@@ -10,9 +10,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductDTO {
-    private int product_id;
+    private int id;
     private String name;
     private String image;
-    private CategoryDTO category;
     private StatusDTO status;
 }

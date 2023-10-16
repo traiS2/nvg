@@ -1,9 +1,9 @@
 package com.trais2.neighborvegetablegarden.controller;
 
 import com.trais2.neighborvegetablegarden.config.GlobalExceptionHandler;
+import com.trais2.neighborvegetablegarden.service.ProductService;
 import com.trais2.neighborvegetablegarden.serviceImpl.ProductServiceImpl;
-import dto.ObjectReturn;
-import dto.ProductDTO;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,13 +12,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import payload.request.product.CreateProductRequest;
+import payload.request.product.UpdateProductRequest;
+import payload.response.MessageResponse;
+
+import java.util.List;
 
 @Controller
 @RestController
 @RequestMapping("/api/product")
 public class ProductController {
 
-    private final ProductServiceImpl productService;
+    private final ProductService productService;
 
     private final GlobalExceptionHandler validationExceptionHandler;
 
@@ -28,18 +32,45 @@ public class ProductController {
         this.validationExceptionHandler = validationExceptionHandler;
     }
 
-    @PostMapping("/add")
+    @GetMapping("/get-product-by-category/{categoryId}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> addProduct( @RequestBody CreateProductRequest product, BindingResult bindingResult) {
+    public ResponseEntity<?> getAllProducts(@PathVariable int categoryId) {
+        List<?> products = productService.getAllProductsByCategory(categoryId);
+        if (products != null) {
+            return ResponseEntity.ok().body(products);
+        } else {
+            return ResponseEntity.badRequest().body(new MessageResponse("Get products failed"));
+        }
+    }
+
+    @PostMapping("/create-product")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> createProduct(@Valid @RequestBody CreateProductRequest product, BindingResult bindingResult) {
         String errorMessage = validationExceptionHandler.getFirstErrorMessage(bindingResult);
         if (errorMessage != null) {
             return ResponseEntity.badRequest().body(errorMessage);
         } else {
-            ObjectReturn<ProductDTO> objectReturn = productService.addProduct(product);
-            if (objectReturn.getMessage() != null) {
-                return ResponseEntity.status(HttpStatus.CREATED).body(objectReturn.getObject());
+            String createProductMessage = productService.createProduct(product);
+            if (createProductMessage != null) {
+                return ResponseEntity.badRequest().body(new MessageResponse(createProductMessage));
             } else {
-                return ResponseEntity.badRequest().body(objectReturn.getMessage());
+                return ResponseEntity.status(HttpStatus.CREATED).body(new MessageResponse("Product created successfully"));
+            }
+        }
+    }
+
+    @PutMapping("/update-product")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> updateProduct(@Valid @RequestBody UpdateProductRequest productRequest, BindingResult bindingResult) {
+        String errorMessage = validationExceptionHandler.getFirstErrorMessage(bindingResult);
+        if (errorMessage != null) {
+            return ResponseEntity.badRequest().body(errorMessage);
+        } else {
+            String updateProductMessage = productService.updateProduct(productRequest);
+            if (updateProductMessage != null) {
+                return ResponseEntity.badRequest().body(new MessageResponse(updateProductMessage));
+            } else {
+                return ResponseEntity.ok().body(new MessageResponse("Product updated successfully"));
             }
         }
     }

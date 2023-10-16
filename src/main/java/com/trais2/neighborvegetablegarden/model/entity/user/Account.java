@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "account", uniqueConstraints = {
-        @UniqueConstraint(columnNames = "account_id"),
+        @UniqueConstraint(columnNames = "id"),
         @UniqueConstraint(columnNames = "username")
 })
 @NoArgsConstructor
@@ -18,14 +18,14 @@ import lombok.NoArgsConstructor;
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long account_id;
+    private Long id;
     @NotBlank
     private String username;
     @NotBlank
     private String password;
 
     @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
     public Account(String username, String password) {

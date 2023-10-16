@@ -14,21 +14,21 @@ import lombok.NoArgsConstructor;
 @Data
 public class Address {
     @Id
-    private int address_id;
+    private int id;
 
-    @Column(columnDefinition = "nvarchar(255)")
-    private String detail_address;
+    @Column(name = "detail_address",columnDefinition = "nvarchar(255)")
+    private String detailAddress;
 
     @ManyToOne
-    @JoinColumn(name = "province_id", referencedColumnName = "province_id")
+    @JoinColumn(name = "province_id", referencedColumnName = "id")
     private Province province;
 
     @ManyToOne
-    @JoinColumn(name = "district_id", referencedColumnName = "district_id")
+    @JoinColumn(name = "district_id", referencedColumnName = "id")
     private District district;
 
     @ManyToOne
-    @JoinColumn(name = "commune_id", referencedColumnName = "commune_id")
+    @JoinColumn(name = "commune_id", referencedColumnName = "id")
     private Commune commune;
 
     @OneToOne(mappedBy = "address")

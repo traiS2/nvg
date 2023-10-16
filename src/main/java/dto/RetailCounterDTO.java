@@ -5,11 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
-public class ObjectReturn<T> {
-    private T object;
-    private String message;
+@AllArgsConstructor
+@NoArgsConstructor
+public class RetailCounterDTO {
+    public int id;
+    public String name;
+    public StatusDTO status;
 }

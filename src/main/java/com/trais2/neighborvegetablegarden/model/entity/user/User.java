@@ -19,20 +19,20 @@ import java.util.Set;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long user_id;
+    private Long id;
 
-    @Column(columnDefinition = "nvarchar(255)")
-    private String first_name;
+    @Column(name = "first_name", columnDefinition = "nvarchar(255)")
+    private String firstName;
 
-    @Column(columnDefinition = "nvarchar(255)")
-    private String last_name;
+    @Column(name = "last_name", columnDefinition = "nvarchar(255)")
+    private String lastName;
 
     private Date yob;
 
     private String image;
 
     @ManyToOne
-    @JoinColumn(name = "status_id", referencedColumnName = "status_id")
+    @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
@@ -45,13 +45,13 @@ public class User {
     private Phone phone;
 
     @OneToOne
-    @JoinColumn(name = "address_id", referencedColumnName = "address_id")
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
     private Set<Role> roles;
 
