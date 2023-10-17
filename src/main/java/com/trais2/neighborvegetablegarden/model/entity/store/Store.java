@@ -18,6 +18,7 @@ import java.util.Set;
 @Data
 public class Store {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(columnDefinition = "nvarchar(255)")

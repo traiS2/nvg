@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class Address {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "detail_address",columnDefinition = "nvarchar(255)")

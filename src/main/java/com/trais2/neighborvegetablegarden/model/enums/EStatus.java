@@ -4,4 +4,8 @@ public enum EStatus {
         ACTIVE,
         INACTIVE,
         DELETED,
+        PENDING,
+        APPROVED,
+        OPEN,
+        CLOSED,
         }

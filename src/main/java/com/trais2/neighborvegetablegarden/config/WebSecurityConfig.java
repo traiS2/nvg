@@ -1,4 +1,4 @@
-package com.trais2.neighborvegetablegarden.security;
+package com.trais2.neighborvegetablegarden.config;
 
 import com.trais2.neighborvegetablegarden.security.jwt.AuthEntryPointJwt;
 import com.trais2.neighborvegetablegarden.security.jwt.AuthTokenFilter;
@@ -62,6 +62,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/test/**").permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .anyRequest().authenticated()
                 );
 

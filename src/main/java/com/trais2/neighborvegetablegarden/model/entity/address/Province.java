@@ -14,6 +14,7 @@ import java.util.Set;
 @Data
 public class Province {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(columnDefinition = "nvarchar(255)")

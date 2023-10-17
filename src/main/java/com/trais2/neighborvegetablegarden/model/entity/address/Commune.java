@@ -14,6 +14,7 @@ import java.util.Set;
 @Data
 public class Commune {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(columnDefinition = "nvarchar(255)")
